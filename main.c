@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Monsieur_Canard <Monsieur_Canard@studen    +#+  +:+       +#+        */
+/*   By: Monsieur Canard <Monsieur Canard@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 10:37:19 by Monsieur_Ca       #+#    #+#             */
-/*   Updated: 2023/12/11 18:51:56 by Monsieur_Ca      ###   ########.fr       */
+/*   Created: 2023/12/18 11:47:27 by Monsieur_Ca       #+#    #+#             */
+/*   Updated: 2024/01/05 17:16:00 by Monsieur Ca      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,43 @@
 
 int	main(int argc, char *argv[])
 {
-	if (argc != 2)
+	t_fractal	fractal;
+	char		mode[1];
+
+	if (verif_arg(argc, argv) == 1)
 	{
-		printf("Wrong answer !!!!!\n");
-		printf("You can ONLY draw this fractals : \n1 - Mandelbrot\n2 - Julia\n");
-		printf("I let you try again !\n");
-		exit (0);
+		if (ft_strncmp(ft_tolower(argv[1]), "mandelbrot", 10) == 0)
+			case_mandelbrot(&fractal, argv[1]);
+		else if (ft_strncmp(ft_tolower(argv[1]), "julia", 5) == 0)
+		{
+			printf("Choose a number:(between 1 and 4)\n");
+			printf("---------------------------------------------------\n");
+			read(0, mode, 1);
+			case_julia(&fractal, argv, mode[0]);
+		}
+		else if (ft_strncmp(ft_tolower(argv[1]), "burningship", 11) == 0)
+			case_burningship(&fractal, argv[1]);
 	}
-	if (ft_strncmp(argv[1], "Julia", 5) == 0)
-		case_julia();
-	else if (ft_strncmp(argv[1], "Mandelbrot", 10) == 0)
-		case_mandelbrot();
 	else
 	{
-		printf("I don't know this fractal !\n");
-		printf("You can draw this fractals : \n1 - Mandelbrot\n2 - Julia\n");
-		printf("Try again !\n");
+		ft_putstr_fd(ERROR_MESSAGE, STDERR_FILENO);
+		exit (EXIT_FAILURE);
 	}
 	return (0);
 }
 
-void	case_julia(void)
+int	verif_arg(int argc, char *argv[])
 {
-	char	str_mode[2];
-	int		index;
-
-	index = 0;
-	printf("You choose Julia !\nYou have 4 different Julia fractals :\n");
-	printf("Witch one do you want to draw ?(enter the number)\n");
-	index = read(0, str_mode, 100);
-	str_mode[index - 1] = '\0';
-	run_fractale_julia(str_mode[0] - 48);
-}
-
-void	case_mandelbrot(void)
-{
-	char	str_mode[2];
-	int		index;
-
-	index = 0;
-	printf("You choose Mandelbrot !\nYou have 4 different Mandelbrot fractals :\n");
-	printf("Witch one do you want to draw ?(enter the number)\n");
-	index = read(0, str_mode, 100);
-	str_mode[index - 1] = '\0';
-	run_fractale_mandelbrot(str_mode[0] - 48);
+	if (argc == 2)
+	{
+		if (ft_strncmp(ft_tolower(argv[1]), "mandelbrot", 10) == 0)
+			return (1);
+		else if (ft_strncmp(ft_tolower(argv[1]), "julia", 5) == 0)
+			return (1);
+		else if (ft_strncmp(ft_tolower(argv[1]), "burningship", 11) == 0)
+			return (1);
+		else
+			return (0);
+	}
+	return (0);
 }
