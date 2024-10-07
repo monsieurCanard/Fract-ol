@@ -1,4 +1,4 @@
-<div align="center"> <img src="https://github.com/monsieurCanard/monsieurCanard/blob/main/badges/fract-olm.png"> </div>
+![Fractol](https://github.com/user-attachments/assets/9e41d13b-a509-41db-aee6-234a499c02b6)
 
 ## Description
 
@@ -9,7 +9,7 @@ Handling of mouse and keyboard events for navigation through the fractal.
 
 * Mandelbrot
 * Julia
-* Burning Ship
+* BurningShip
 
 ## Usage
 
