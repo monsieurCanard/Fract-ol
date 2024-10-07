@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Monsieur Canard <Monsieur Canard@studen    +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:47:27 by Monsieur_Ca       #+#    #+#             */
-/*   Updated: 2024/01/05 17:16:00 by Monsieur Ca      ###   ########.fr       */
+/*   Updated: 2024/10/07 12:46:43 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-	t_fractal	fractal;
-	char		mode[1];
+	t_fractal fractal;
+	char mode[1];
+	ssize_t ret;
 
 	if (verif_arg(argc, argv) == 1)
 	{
@@ -25,7 +26,8 @@ int	main(int argc, char *argv[])
 		{
 			printf("Choose a number:(between 1 and 4)\n");
 			printf("---------------------------------------------------\n");
-			read(0, mode, 1);
+			ret = read(0, mode, 1);
+			(void)ret;
 			case_julia(&fractal, argv, mode[0]);
 		}
 		else if (ft_strncmp(ft_tolower(argv[1]), "burningship", 11) == 0)
@@ -34,12 +36,12 @@ int	main(int argc, char *argv[])
 	else
 	{
 		ft_putstr_fd(ERROR_MESSAGE, STDERR_FILENO);
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	return (0);
 }
 
-int	verif_arg(int argc, char *argv[])
+int verif_arg(int argc, char *argv[])
 {
 	if (argc == 2)
 	{

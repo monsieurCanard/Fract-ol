@@ -11,15 +11,17 @@
 /* ************************************************************************** */
 #include "fractol.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void ft_putstr_fd(char *s, int fd)
 {
-	int	i;
+	int i;
+	ssize_t ret;
 
 	i = 0;
 	if (!s)
-		return ;
+		return;
 	if (fd < 0)
-		return ;
+		return;
 	while (s[i])
-		write (fd, &s[i++], 1);
+		ret = write(fd, &s[i++], 1);
+	(void)ret;
 }
